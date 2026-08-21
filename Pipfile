@@ -13,6 +13,9 @@ django-filter = "*"
 djoser = "*"
 djangorestframework-simplejwt = "*"
 django-templated-mail = "*"
+redis = "*"
+celery = "*"
+flower = "*"
 
 [dev-packages]
 autopep8 = "*"

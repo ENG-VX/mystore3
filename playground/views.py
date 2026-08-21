@@ -1,9 +1,13 @@
 from django.core.mail import send_mail, mail_admins, BadHeaderError, EmailMessage
 from django.shortcuts import render
 from templated_mail.mail import BaseEmailMessage
-
+from .tasks import notify_customers
 
 def say_hello(request):
+    notify_customers.delay('Hi man')
+    return render(request,'hello.html',{'name':'Abdullah'})
+
+def senEmail(request):
     try:
         # send_mail('test', "I'm Just testing", 'sender@store.com', ['resevers@store.com'])
 
