@@ -1,4 +1,4 @@
-from django.core.mail import send_mail, mail_admins, BadHeaderError, EmailMessage
+from django.core.mail import send_mail, mail_admins, EmailMessage
 from django.shortcuts import render
 from templated_mail.mail import BaseEmailMessage
 from .tasks import notify_customers
@@ -22,6 +22,6 @@ def senEmail(request):
             context={'name':"Abdullah"}
         )
         message.send(['resevers@store.com'])
-    except BadHeaderError:
+    except ValueError:
         pass
     return render(request, 'hello.html', {'name': 'Mosh'})

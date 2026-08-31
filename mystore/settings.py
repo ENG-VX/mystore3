@@ -180,12 +180,18 @@ SIMPLE_JWT = {
 }
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 2525
-DEFAULT_EMAIL_FORMAT = 'abd@store.com'
+MAILERS = {
+    'default': {
+        'BACKEND': 'django.core.mail.backends.smtp.EmailBackend',
+        'OPTIONS': {
+            'host': 'localhost',
+            'port': 2525,
+            'username': '',
+            'password': '',
+        },
+    },
+}
+DEFAULT_FROM_EMAIL = 'abd@store.com'
 
 ADMINS = [
     ('Abdullah', 'abd@store.com'),
