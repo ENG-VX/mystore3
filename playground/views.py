@@ -2,10 +2,16 @@ from django.core.mail import send_mail, mail_admins, EmailMessage
 from django.shortcuts import render
 from templated_mail.mail import BaseEmailMessage
 from .tasks import notify_customers
+import requests
+from django.core.cache import cache
 
 def say_hello(request):
-    notify_customers.delay('Hi man')
-    return render(request,'hello.html',{'name':'Abdullah'})
+    key = 'httpbin_result'
+    if cache.get(key) is None:
+        response = requests.get('https://httpbin.org/delay/2')
+        data = response.json()
+        cache.set(key, data, 10*60)
+    return render(request,'hello.html',{'name':cache.get(key)})
 
 def senEmail(request):
     try:
