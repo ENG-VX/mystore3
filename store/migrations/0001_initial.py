@@ -2,6 +2,7 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
+import uuid
 
 
 class Migration(migrations.Migration):
@@ -15,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Cart',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
             ],
         ),
