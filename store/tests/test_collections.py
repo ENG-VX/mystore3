@@ -1,4 +1,5 @@
 import pytest
+from django.contrib.auth import get_user_model
 from rest_framework import status
 from store.models import Collection, Product
 from model_bakery import baker  
@@ -162,7 +163,8 @@ class TestUpdateProduct:
 class TestDeleteProduct:
     def test_if_product_has_order_items_returns_405(self, api_client, authenticate):
         product = baker.make(Product)
-        customer = baker.make('store.Customer')
+        user = baker.make(get_user_model())
+        customer = baker.make('store.Customer', user=user)
         order = baker.make('store.Order', customer=customer)
         baker.make('store.OrderItem', product=product, order=order, quantity=1, unit_price=product.unit_price)
         authenticate(True)
